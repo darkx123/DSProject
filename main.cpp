@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
         istringstream iss(lineStr);
         iss >> name1 >> name2 >> distance;
         TaipeiUBike.inputMapData(name1, name2, distance);
-        cout << name1 << " " << name2 << " " << distance << endl;
     }
     inFile_map.close();
 
@@ -43,12 +42,56 @@ int main(int argc, char *argv[])
         //make a input string stream
         istringstream iss(lineStr);
         //read from the iss until end of string
-        string word;
-        while( iss >> word )
+        string command;
+        while( iss >> command )
         {
-            cout <<word << " ";
+            cout <<command << " ";
+            if (command == "NewBike")
+            {
+                string bike_class;
+                string license;
+                int mile;
+                string station_Name;
+                iss >> bike_class >> license >> mile >> station_Name;
+                TaipeiUBike.NewBike(bike_class, license, mile, station_Name);
+            }
+            else if (command == "HashReport")
+            {
+                TaipeiUBike.HashReport();
+            }
+            else if (command == "JunkIt")
+            {
+
+            }
+            else if (command == "Rent")
+            {
+
+            }
+            else if (command == "Returns")
+            {
+
+            }
+            else if (command == "Trans")
+            {
+
+            }
+            else if (command == "StationReport")
+            {
+
+            }
+            else if (command == "NetSearch")
+            {
+
+            }
+            else if (command == "UbikeReport")
+            {
+
+            }
+            else
+            {
+
+            }
         }
-        cout << endl;
     }
     inFile_transaction.close();
 

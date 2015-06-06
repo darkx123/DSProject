@@ -76,4 +76,5 @@ int main()
     TaipeiUBike.RentBike("Zhongshan", "Electric");
     TaipeiUBike.ReturnBike("Zhongshan", A0, 70);
     TaipeiUBike.NetSearch("Zhongshan");
+    cout << "abc";
 }

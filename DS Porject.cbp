@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="TC3_basic/testCase03 TC3_basic/testMap" />
+				<Option parameters="TC3_basic/testCase03 TC3_basic/testMap TC3_basic/out.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

@@ -233,8 +233,8 @@ void UBikeSystem::Inquire(string license)
     outFile << setw(15) << ClassEumToString(aBike->Class);
     cout << setw(15) << Station_EnumToName(aBike->Station);
     outFile << setw(15) << Station_EnumToName(aBike->Station);
-    cout << endl;
-    outFile << endl;
+    cout << endl << endl;
+    outFile << endl << endl;
 }
 
 void UBikeSystem::StationReport(string s_name)

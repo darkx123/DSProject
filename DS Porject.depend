@@ -1,0 +1,66 @@
+# depslib dependency file v1.0
+1433351499 source:d:\資料結構\ds porject\main.cpp
+	<iostream>
+	<stdio.h>
+	<string>
+	<sstream>
+	<iomanip>
+	"datatype.h"
+	"stringtoenum.h"
+	"heap.h"
+	"station.h"
+	"StationMap.h"
+	"LicenseTag.h"
+	"UBikeSys.h"
+
+1433259816 d:\資料結構\ds porject\datatype.h
+	<iostream>
+	<string>
+
+1432972200 d:\資料結構\ds porject\heap.h
+	<iostream>
+	<string>
+	<sstream>
+	"datatype.h"
+
+1433351615 d:\資料結構\ds porject\station.h
+	<iostream>
+	<string>
+	<iomanip>
+	"datatype.h"
+
+1433263827 d:\資料結構\ds porject\stationmap.h
+	<iostream>
+	<stdio.h>
+	<string>
+	<sstream>
+	"datatype.h"
+
+1432931433 source:d:\資料結構\ds porject\stringtoenum.cpp
+	<string>
+	<map>
+	"datatype.h"
+
+1432931433 d:\資料結構\ds porject\stringtoenum.cpp
+	<string>
+	<map>
+	"datatype.h"
+
+1433070513 d:\資料結構\ds porject\stringtoenum.h
+	<string>
+	<map>
+	"datatype.h"
+
+1433263827 d:\資料結構\ds porject\licensetag.h
+	<string>
+	"datatype.h"
+
+1433351649 d:\資料結構\ds porject\ubikesys.h
+	"datatype.h"
+	"station.h"
+	"StationMap.h"
+	"stringtoenum.h"
+	"LicenseTag.h"
+	<iostream>
+	<string>
+

@@ -65,6 +65,7 @@ void Station::InsertHeap(BikePtr aBike)  //If a bike is rented, insert it into H
     int currentNode = ++aHeap->Number;
     while(currentNode != 1 && aHeap->Elem[currentNode/2]->Mileage < aBike->Mileage)
     {
+        aHeap->Elem[currentNode/2]->Cursor = currentNode;
         aHeap->Elem[currentNode] = aHeap->Elem[currentNode/2];
         currentNode = currentNode / 2;
     }
@@ -93,12 +94,14 @@ void Station::DeleteHeap(BikePtr aBike) //If a bike is rented, delete it from HR
     if(currentNode != 1 && aHeap->Elem[currentNode/2]->Mileage == lastNode->Mileage)
     {
         aHeap->Elem[currentNode] = lastNode;
+        lastNode->Cursor = currentNode;
         return;
     }
     else if (currentNode != 1 && aHeap->Elem[currentNode/2]->Mileage < lastNode->Mileage)
     {
         while(currentNode != 1 && aHeap->Elem[currentNode/2]->Mileage < lastNode->Mileage)
         {
+            aHeap->Elem[currentNode/2]->Cursor = currentNode;
             aHeap->Elem[currentNode] = aHeap->Elem[currentNode/2];
             currentNode = currentNode / 2;
         }
@@ -114,15 +117,17 @@ void Station::DeleteHeap(BikePtr aBike) //If a bike is rented, delete it from HR
             {
                 child++;
             }
-            if(lastNode->Mileage > aHeap->Elem[child]->Mileage)
+            if(lastNode->Mileage >= aHeap->Elem[child]->Mileage)
             {
                 break;
             }
+            aHeap->Elem[child]->Cursor = currentNode;
             aHeap->Elem[currentNode] = aHeap->Elem[child];
             currentNode = child;
             child = child * 2;
         }
         aHeap->Elem[currentNode] = lastNode;
+        lastNode->Cursor = currentNode;
     }
 }
 

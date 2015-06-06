@@ -119,8 +119,8 @@ void UBikeSystem::ReturnBike(string s_name, string license, int Mile)
         l[i] = license[i];
     }
     bike = HT.SearhBike(l);
-    bike->Mileage = bike->Mileage + Mile;
-    int chargevalue = Charge(Station_NameToEnum(s_name), Mile, bike);
+    int chargevalue = Charge(Station_NameToEnum(s_name), Mile - bike->Mileage, bike);
+    bike->Mileage = Mile;
     Stations[bike->Station].DeleteHeap(bike);
     bike->Status = Free;
     Stations[bike->Station].InsertHeap(bike);
@@ -320,9 +320,9 @@ void UBikeSystem::UbikeReport()
     {
         for(int j = 1; j <= Stations[i].m_Station.HRent.Number; j++)
         {
-             cout << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[i]->License);
-             cout << setw(12) << Stations[i].m_Station.HRent.Elem[i]->Mileage;
-             cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[i]->Class);
+             cout << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[j]->License);
+             cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
+             cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
              cout << setw(12) << Station_EnumToName(StationName(i));
              cout << endl;
         }

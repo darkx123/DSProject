@@ -13,7 +13,7 @@ using namespace std;
 class UBikeSystem
 {
 public:
-    UBikeSystem();
+    UBikeSystem(char* output_filename);
     void NewBike(string bikeclass, string license, int Mile, string S_Name);
     int JunkIt(string license);
     void RentBike(string s_name, string Class);
@@ -28,15 +28,16 @@ public:
     void HashReport();
     int Charge(StationName returnStation, int Mile, BikePtr aBike);
 private:
+    ofstream outFile;
     HashingTable HT;
     Station Stations[12];
     StationMap S_Map;
     BikePtr bike;
 };
 
-UBikeSystem::UBikeSystem()
+UBikeSystem::UBikeSystem(char* output_filename)
 {
-
+    outFile.open(output_filename);
 }
 
 void UBikeSystem::NewBike(string bikeclass, string license, int Mile, string S_Name)
@@ -62,6 +63,7 @@ void UBikeSystem::NewBike(string bikeclass, string license, int Mile, string S_N
         case 3 : Stations[bike->Station].m_Station.NumHybrid++; break;
     }
     cout << "New bike is received by Station " << S_Name << "." << endl;
+    outFile << "New bike is received by Station " << S_Name << "." << endl;
 }
 
 int UBikeSystem::JunkIt(string license)
@@ -388,7 +390,7 @@ void UBikeSystem::MinDis()
 
 void UBikeSystem::HashReport()
 {
-    HT.HashReport();
+    HT.HashReport(outFile);
 }
 
 #endif // ubikesys_h

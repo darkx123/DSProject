@@ -17,19 +17,16 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //read a line until EOF
-    UBikeSystem TaipeiUBike;
-    ifstream inFile_map;
-    ifstream inFile_transaction;
-    ofstream outFile;
-    inFile_map.open(argv[2]);
-    inFile_transaction.open(argv[1]);
-    outFile.open(argv[3]);
+    ifstream inFile_map(argv[2]);
+    ifstream inFile_transaction(argv[1]);
+    char *output_filename = argv[3];
+
 
     string lineStr;
     string name1;
     string name2;
     int distance;
+    UBikeSystem TaipeiUBike(output_filename);
     while (getline(inFile_map,lineStr))
     {
         istringstream iss(lineStr);
@@ -99,11 +96,11 @@ int main(int argc, char *argv[])
             {
                 string s_name;
                 iss >> s_name;
-                TaipeiUBike.NetSearch(s_name);
+                TaipeiUBike.NetSearch(s_name);;
             }
             else if (command == "UbikeReport")
             {
-                TaipeiUBike.UbikeReport();
+//                TaipeiUBike.UbikeReport();
             }
             else
             {

@@ -1,6 +1,7 @@
 #ifndef LicenseTag_h
 #define LicenseTag_h
 #include <string>
+#include <fstream>
 #include "datatype.h"
 
 class HashingTable
@@ -10,7 +11,7 @@ public:
     void InsertNewBike(BikePtr aBike);
     int LicenseTag(LicenseType license);
     int DeleteBikeFromHTable(BikePtr aBike); //only delete HNodeType from Hashing Table, BikePtr still exists.
-    void HashReport();
+    void HashReport(ofstream &outFile);
     BikePtr SearhBike(LicenseType license);
 private:
     HTableType LicenseTable;
@@ -56,9 +57,9 @@ void HashingTable::InsertNewBike(BikePtr aBike)
     }
 }
 
-void HashingTable::HashReport()
+void HashingTable::HashReport(ofstream &outFile)
 {
-    cout << "Hash Table";
+    outFile << "Hash Table";
     for(int i = 0; i < 256; i++)
     {
         HNodeType *currentNode = &(LicenseTable.table[i]);

@@ -212,10 +212,9 @@ int HashingTable::LicenseTag(LicenseType license)
         licenseValue = charValue + licenseValue * 31;
     }
 
-    return (int(char(licenseValue >> 10)));
+    return ((licenseValue >> 10) & 0xFF);
 
 }
-
 
 
 

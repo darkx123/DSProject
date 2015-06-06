@@ -45,15 +45,15 @@ int main(int argc, char *argv[])
         string command;
         while( iss >> command )
         {
-            cout <<command << " ";
+//            cout << command << " ";
             if (command == "NewBike")
             {
                 string bike_class;
                 string license;
                 int mile;
-                string station_Name;
-                iss >> bike_class >> license >> mile >> station_Name;
-                TaipeiUBike.NewBike(bike_class, license, mile, station_Name);
+                string station_name;
+                iss >> bike_class >> license >> mile >> station_name;
+                TaipeiUBike.NewBike(bike_class, license, mile, station_name);
             }
             else if (command == "HashReport")
             {
@@ -61,15 +61,24 @@ int main(int argc, char *argv[])
             }
             else if (command == "JunkIt")
             {
-
+                string license;
+                iss >> license;
+                TaipeiUBike.JunkIt(license);
             }
             else if (command == "Rent")
             {
-
+                string s_name;
+                string bike_class;
+                iss >> s_name >> bike_class;
+                TaipeiUBike.RentBike(s_name, bike_class);
             }
             else if (command == "Returns")
             {
-
+                string s_name;
+                string license;
+                int mile;
+                iss >> s_name >> license >> mile;
+                TaipeiUBike.ReturnBike(s_name, license, mile);
             }
             else if (command == "Trans")
             {

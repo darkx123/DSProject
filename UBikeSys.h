@@ -75,19 +75,23 @@ int UBikeSystem::JunkIt(string license)
     }
     bike = HT.SearhBike(L);
     cout << "Bike ";
+    outFile << "Bike ";
     for(int i = 0; i < 5; i++)
     {
         cout << license[i];
+        outFile << license[i];
     }
     if(!bike) //check existence of bike
     {
-        cout <<" does not belong to our company." << endl;
+        cout << " does not belong to our company." << endl;
+        outFile << " does not belong to our company." << endl;
         return 1;
     }
 
     if(bike->Status == 1)
     {
-        cout <<" is now being rented." << endl;
+        cout << " is now being rented." << endl;
+        outFile << " is now being rented." << endl;
         return 1;
     }
 
@@ -100,7 +104,8 @@ int UBikeSystem::JunkIt(string license)
         case 3 : Stations[bike->Station].m_Station.NumHybrid--; break;
     }
     HT.DeleteBikeFromHTable(bike);
-    cout <<" is deleted from " << Station_EnumToName(bike->Station) << "." <<endl;
+    cout << " is deleted from " << Station_EnumToName(bike->Station) << "." <<endl;
+    outFile << " is deleted from " << Station_EnumToName(bike->Station) << "." <<endl;
     delete bike;
     return 0;
 }
@@ -108,9 +113,15 @@ int UBikeSystem::JunkIt(string license)
 void UBikeSystem::RentBike(string s_name, string Class)
 {
     if(Stations[Station_NameToEnum(s_name)].RentBike(ClassStringToEnum(Class)) == 0)
+    {
         cout << "A bike is rented from " << s_name << "." <<endl;
+        outFile << "A bike is rented from " << s_name << "." <<endl;
+    }
     else
+    {
         cout << "No free bike is available." <<endl;
+        outFile << "No free bike is available." <<endl;
+    }
 }
 
 void UBikeSystem::ReturnBike(string s_name, string license, int Mile)
@@ -135,26 +146,31 @@ void UBikeSystem::ReturnBike(string s_name, string license, int Mile)
         case 3 : Stations[bike->Station].m_Station.NetHybrid = Stations[bike->Station].m_Station.NetHybrid + chargevalue; break;
     }
     cout << "Rental charge for this bike is " << chargevalue << "." <<endl;
+    outFile << "Rental charge for this bike is " << chargevalue << "." <<endl;
 }
 
 void UBikeSystem::TransBike(string s_name, string license)
 {
     LicenseType l;
     cout << "Bike ";
+    outFile << "Bike ";
     for(int i = 0; i < 5; i++)
     {
         l[i] = license[i];
         cout << l[i];
+        outFile << l[i];
     }
     BikePtr aBike = HT.SearhBike(l);
     if(!aBike)
     {
         cout << " does not belong to our company." <<endl;
+        outFile << " does not belong to our company." <<endl;
         return;
     }
     if(aBike->Status == Rented)
     {
         cout << " is now being rented." <<endl;
+        outFile << " is now being rented." <<endl;
         return;
     }
     //Stations[aBike->Station].RemoveBike(aBike);
@@ -176,6 +192,7 @@ void UBikeSystem::TransBike(string s_name, string license)
         case 3 : Stations[aBike->Station].m_Station.NumHybrid++; break;
     }
     cout << " is transferred to " << s_name << "." <<endl;
+    outFile << " is transferred to " << s_name << "." <<endl;
 }
 
 void UBikeSystem::Inquire(string license)
@@ -189,34 +206,53 @@ void UBikeSystem::Inquire(string license)
     if(!aBike)
     {
         cout << "Bike ";
+        outFile << "Bike ";
         for(int i = 0; i < 5; i++)
         {
             cout << l[i];
+            outFile << l[i];
         }
         cout << " does not belong to our company." <<endl;
+        outFile << " does not belong to our company." <<endl;
         return;
     }
     cout << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "Station" << endl;
+    outFile << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "Station" << endl;
     for(int i = 0; i < 4; i ++)
+    {
         cout << "=====" << "=====" << "=====";
-    cout <<endl;
-    cout << setw(15) << license;
-    cout << setw(15) << aBike->Mileage;
-    cout << setw(15) << ClassEumToString(aBike->Class);
-    cout << setw(15) << Station_EnumToName(aBike->Station);
+        outFile << "=====" << "=====" << "=====";
+    }
     cout << endl;
-
+    outFile << endl;
+    cout << setw(15) << license;
+    outFile << setw(15) << license;
+    cout << setw(15) << aBike->Mileage;
+    outFile << setw(15) << aBike->Mileage;
+    cout << setw(15) << ClassEumToString(aBike->Class);
+    outFile << setw(15) << ClassEumToString(aBike->Class);
+    cout << setw(15) << Station_EnumToName(aBike->Station);
+    outFile << setw(15) << Station_EnumToName(aBike->Station);
+    cout << endl;
+    outFile << endl;
 }
 
 void UBikeSystem::StationReport(string s_name)
 {
     cout <<setw(30) << s_name <<endl;
+    outFile <<setw(30) << s_name <<endl;
     /*================Free Bike Part==================================================================================*/
     cout <<setw(30) << "Free Bikes" <<endl;
+    outFile <<setw(30) << "Free Bikes" <<endl;
     cout << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "SubTotal" << endl;
+    outFile << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "SubTotal" << endl;
     for(int i = 0; i < 4; i ++)
+    {
         cout << "=====" << "=====" << "=====";
+        outFile << "=====" << "=====" << "=====";
+    }
     cout << endl;
+    outFile << endl;
     int subtotal = 0;
     for(int i = 0; i < 4; i++)
     {
@@ -225,67 +261,117 @@ void UBikeSystem::StationReport(string s_name)
         for(int j = 1; j <= aHeap->Number; j++)
         {
              cout << setw(15) << LicenseToString(aHeap->Elem[j]->License);
+             outFile << setw(15) << LicenseToString(aHeap->Elem[j]->License);
              cout << setw(15) << aHeap->Elem[j]->Mileage;
+             outFile << setw(15) << aHeap->Elem[j]->Mileage;
              cout << setw(15) << ClassEumToString(aHeap->Elem[j]->Class);
+             outFile << setw(15) << ClassEumToString(aHeap->Elem[j]->Class);
              cout << endl;
+             outFile << endl;
         }
     }
 
     for(int i = 0; i < 4; i ++)
+    {
         cout << "=====" << "=====" << "=====";
+        outFile << "=====" << "=====" << "=====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(60) << subtotal;
+    outFile << setw(60) << subtotal;
     cout << endl <<endl;
+    outFile << endl <<endl;
 
 /*================Rented Bike Part==================================================================================*/
-    cout <<setw(30) << "Rented Bikes" <<endl;
+    cout << setw(30) << "Rented Bikes" <<endl;
+    outFile << setw(30) << "Rented Bikes" <<endl;
     cout << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "SubTotal" << endl;
+    outFile << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "SubTotal" << endl;
     for(int i = 0; i < 4; i ++)
+    {
         cout << "=====" << "=====" << "=====";
+        outFile << "=====" << "=====" << "=====";
+    }
     cout << endl;
+    outFile << endl;
 
     for(int j = 1; j <= Stations[Station_NameToEnum(s_name)].m_Station.HRent.Number; j++)
     {
          cout << setw(15) << LicenseToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License);
+         outFile << setw(15) << LicenseToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License);
          cout << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Mileage;
+         outFile << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Mileage;
          cout << setw(15) << ClassEumToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Class);
+         outFile << setw(15) << ClassEumToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Class);
          cout << endl;
+         outFile << endl;
     }
 
     for(int i = 0; i < 4; i ++)
+    {
         cout << "=====" << "=====" << "=====";
+        outFile << "=====" << "=====" << "=====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(60) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Number;
+    outFile << setw(60) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Number;
     cout << endl <<endl;
+    outFile << endl <<endl;
 
 /*================ Net Part ==================================================================================*/
     cout << setw(12) << "Net" << setw(12) << "Electric" << setw(12) << "Lady";
+    outFile << setw(12) << "Net" << setw(12) << "Electric" << setw(12) << "Lady";
     cout << setw(12) << "Road" << setw(12) << "Hybrid" <<endl;
+    outFile << setw(12) << "Road" << setw(12) << "Hybrid" <<endl;
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.Net;
+    outFile << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.Net;
     cout << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumElectric;
+    outFile << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumElectric;
     cout << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumLady;
+    outFile << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumLady;
     cout << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumRoad;
+    outFile << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumRoad;
     cout << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumHybrid;
+    outFile << setw(12) << Stations[Station_NameToEnum(s_name)].m_Station.NumHybrid;
     cout << endl;
+    outFile << endl;
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl << endl;
+    outFile << endl << endl;
 }
 
 void UBikeSystem::UbikeReport()
 {
     cout << setw(30) << "Taipei U-bike" <<endl;
+    outFile << setw(30) << "Taipei U-bike" <<endl;
     cout << setw(30) << "Free Bikes" <<endl;
+    outFile << setw(30) << "Free Bikes" <<endl;
     cout << setw(12) << "License" << setw(12) << "Mileage";
+    outFile << setw(12) << "License" << setw(12) << "Mileage";
     cout << setw(12) << "Class" << setw(12) << "Station" << setw(12) << "Total" <<endl;
+    outFile << setw(12) << "Class" << setw(12) << "Station" << setw(12) << "Total" <<endl;
     int FreeTotal = 0, RentedTotal = 0, Net = 0;
     int ElectricNumber = 0, LadyNumber = 0, RoadNumber = 0, HybridNumber = 0;
     for(int i = 0; i < 5; i++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     for(int i = 0; i < 12; i++)
     {
         for(int j = 0; j < 4; j++)
@@ -295,10 +381,15 @@ void UBikeSystem::UbikeReport()
             for(int k = 1; k <= aHeap->Number; k++)
                 {
                      cout << setw(12) << LicenseToString(aHeap->Elem[k]->License);
+                     outFile << setw(12) << LicenseToString(aHeap->Elem[k]->License);
                      cout << setw(12) << aHeap->Elem[k]->Mileage;
+                     outFile << setw(12) << aHeap->Elem[k]->Mileage;
                      cout << setw(12) << ClassEumToString(aHeap->Elem[k]->Class);
+                     outFile << setw(12) << ClassEumToString(aHeap->Elem[k]->Class);
                      cout << setw(12) << Station_EnumToName(StationName(i));
+                     outFile << setw(12) << Station_EnumToName(StationName(i));
                      cout << endl;
+                     outFile << endl;
                 }
         }
         ElectricNumber = ElectricNumber + Stations[i].m_Station.NumElectric;
@@ -308,59 +399,105 @@ void UBikeSystem::UbikeReport()
         Net = Net + Stations[i].m_Station.Net;
     }
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(60) << FreeTotal << endl  << endl;
+    outFile << setw(60) << FreeTotal << endl  << endl;
 
     cout << setw(30) << "Rented Bikes" <<endl;
+    outFile << setw(30) << "Rented Bikes" <<endl;
     cout << setw(12) << "License" << setw(12) << "Mileage";
+    outFile << setw(12) << "License" << setw(12) << "Mileage";
     cout << setw(12) << "Class" << setw(12) << "Station" << setw(12) << "Total" <<endl;
+    outFile << setw(12) << "Class" << setw(12) << "Station" << setw(12) << "Total" <<endl;
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     for(int i = 0; i < 12; i++)
     {
         for(int j = 1; j <= Stations[i].m_Station.HRent.Number; j++)
         {
              cout << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[j]->License);
+             outFile << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[j]->License);
              cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
+             outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
              cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
+             outFile << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
              cout << setw(12) << Station_EnumToName(StationName(i));
+             outFile << setw(12) << Station_EnumToName(StationName(i));
              cout << endl;
+             outFile << endl;
         }
         RentedTotal = RentedTotal + Stations[i].m_Station.HRent.Number;
     }
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(60) << RentedTotal << endl  << endl;
+    outFile << setw(60) << RentedTotal << endl  << endl;
 
     cout << setw(12) << "Net" << setw(12) << "Electric" << setw(12) << "Lady";
+    outFile << setw(12) << "Net" << setw(12) << "Electric" << setw(12) << "Lady";
     cout << setw(12) << "Road" << setw(12) << "Hybrid" <<endl;
+    outFile << setw(12) << "Road" << setw(12) << "Hybrid" <<endl;
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl;
+    outFile << endl;
     cout << setw(12) << Net;
+    outFile << setw(12) << Net;
     cout << setw(12) << ElectricNumber;
+    outFile << setw(12) << ElectricNumber;
     cout << setw(12) << LadyNumber;
+    outFile << setw(12) << LadyNumber;
     cout << setw(12) << RoadNumber;
+    outFile << setw(12) << RoadNumber;
     cout << setw(12) << HybridNumber;
+    outFile << setw(12) << HybridNumber;
     cout << endl;
+    outFile << endl;
     for(int i = 0; i < 5; i ++)
+    {
         cout << "====" << "====" << "====";
+        outFile << "====" << "====" << "====";
+    }
     cout << endl << endl;
+    outFile << endl << endl;
 }
 
 void UBikeSystem::NetSearch(string s_name)
 {
     cout << s_name << endl;
+    outFile << s_name << endl;
     cout << "=====" << "=====" << "=====" << endl;
+    outFile << "=====" << "=====" << "=====" << endl;
     cout << "Electric " << Stations[Station_NameToEnum(s_name)].m_Station.NetElectric << endl;
+    outFile << "Electric " << Stations[Station_NameToEnum(s_name)].m_Station.NetElectric << endl;
     cout << "Lady " << Stations[Station_NameToEnum(s_name)].m_Station.NetLady << endl;
+    outFile << "Lady " << Stations[Station_NameToEnum(s_name)].m_Station.NetLady << endl;
     cout << "Road " << Stations[Station_NameToEnum(s_name)].m_Station.NetRoad << endl;
+    outFile << "Road " << Stations[Station_NameToEnum(s_name)].m_Station.NetRoad << endl;
     cout << "Hybrid " << Stations[Station_NameToEnum(s_name)].m_Station.NetHybrid << endl;
+    outFile << "Hybrid " << Stations[Station_NameToEnum(s_name)].m_Station.NetHybrid << endl;
     cout << "=====" << "=====" << "=====" << endl;
+    outFile << "=====" << "=====" << "=====" << endl;
     cout << "Total "<< Stations[Station_NameToEnum(s_name)].m_Station.Net << endl <<endl;
+    outFile << "Total "<< Stations[Station_NameToEnum(s_name)].m_Station.Net << endl <<endl;
 }
 
 int UBikeSystem::Charge(StationName returnStation, int Mile, BikePtr aBike)

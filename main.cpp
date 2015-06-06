@@ -100,7 +100,13 @@ int main(int argc, char *argv[])
             }
             else if (command == "UbikeReport")
             {
-//                TaipeiUBike.UbikeReport();
+                TaipeiUBike.UbikeReport();
+            }
+            else if (command == "Inquire")
+            {
+                string license;
+                iss >> license;
+                TaipeiUBike.Inquire(license);
             }
             else
             {

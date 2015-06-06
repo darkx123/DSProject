@@ -59,6 +59,7 @@ void HashingTable::InsertNewBike(BikePtr aBike)
 
 void HashingTable::HashReport(ofstream &outFile)
 {
+    cout << "Hash Table";
     outFile << "Hash Table";
     for(int i = 0; i < 256; i++)
     {
@@ -66,24 +67,30 @@ void HashingTable::HashReport(ofstream &outFile)
         if(currentNode->Ptr)
         {
             cout << endl;
+            outFile << endl;
             cout << i << " ";
+            outFile << i << " ";
             for(int j = 0; j < 5; j++)
             {
                 cout << currentNode->License[j];
+                outFile << currentNode->License[j];
             }
         }
         currentNode = currentNode->next_ptr;
         while(currentNode)
         {
             cout << "->";
+            outFile << "->";
             for(int j = 0; j < 5; j++)
             {
                 cout << currentNode->License[j];
+                outFile << currentNode->License[j];
             }
             currentNode = currentNode->next_ptr;
         }
     }
     cout << endl;
+    outFile << endl;
 }
 
 BikePtr HashingTable::SearhBike(LicenseType license)

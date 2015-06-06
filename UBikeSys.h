@@ -23,6 +23,9 @@ public:
     void StationReport(string s_name);
     void UbikeReport();
     void NetSearch(string s_name);
+    void inputMapData(string name1, string name2, int distance);
+    void MinDis();
+    void HashReport();
     int Charge(StationName returnStation, int Mile, BikePtr aBike);
 private:
     HashingTable HT;
@@ -373,5 +376,19 @@ int UBikeSystem::Charge(StationName returnStation, int Mile, BikePtr aBike)
     }
 }
 
+void UBikeSystem::inputMapData(string name1, string name2, int distance)
+{
+    S_Map.inputMapData(name1, name2, distance);
+}
+
+void UBikeSystem::MinDis()
+{
+    S_Map.MinDis();
+}
+
+void UBikeSystem::HashReport()
+{
+    HT.HashReport();
+}
 
 #endif // ubikesys_h

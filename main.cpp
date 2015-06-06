@@ -32,8 +32,9 @@ int main(int argc, char *argv[])
     {
         istringstream iss(lineStr);
         iss >> name1 >> name2 >> distance;
-//        TaipeiUBike.S_Map.inputMapData(name1, name2, distance);
+        TaipeiUBike.inputMapData(name1, name2, distance);
         cout << name1 << " " << name2 << " " << distance << endl;
+        cout << "eeeeeeeeeeeeeeeeeeee";
     }
     inFile_map.close();
 

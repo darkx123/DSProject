@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
         iss >> name1 >> name2 >> distance;
         TaipeiUBike.inputMapData(name1, name2, distance);
         cout << name1 << " " << name2 << " " << distance << endl;
+        cout <<"test";
     }
     inFile_map.close();
 

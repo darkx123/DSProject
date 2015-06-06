@@ -1,0 +1,45 @@
+New bike is received by Station Xinpu.
+New bike is received by Station Jingmei.
+New bike is received by Station Jingmei.
+New bike is received by Station Jingmei.
+New bike is received by Station Jingmei.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Liuzhangli.
+New bike is received by Station Liuzhangli.
+New bike is received by Station Liuzhangli.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Danshui.
+New bike is received by Station Ximen.
+New bike is received by Station Ximen.
+        License        Mileage          Class        Station
+============================================================
+          CCCC0             33       Electric        Danshui
+
+        License        Mileage          Class        Station
+============================================================
+          CCCC1             33       Electric          Ximen
+
+Bike DDDDD does not belong to our company.
+        License        Mileage          Class        Station
+============================================================
+          NTHU3              1           Lady        Jingmei
+
+Bike DDDD2 does not belong to our company.
+        License        Mileage          Class        Station
+============================================================
+          NTHU6              3           Lady        Danshui
+
+        License        Mileage          Class        Station
+============================================================
+          AAAA3             37         Hybrid     Liuzhangli
+
+Bike PPPPP does not belong to our company.
+Bike 00100 does not belong to our company.

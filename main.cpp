@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <string>
 #include <sstream>
@@ -13,28 +14,59 @@
 
 using namespace std;
 
+//
 //int main(int argc, char *argv[])
 //{
-//    freopen("testCase03","r",stdin);
-//    string a;
-//    while(cin)
+//    //read a line until EOF
+//    ifstream inFile_map;
+//    ifstream inFile_transaction;
+//    inFile_map.open(argv[2]);
+//    inFile_transaction.open(argv[1]);
+//
+//    string lineStr;
+//    while (getline(inFile_map,lineStr))
 //    {
-//        getline(cin, a);
-//        cout << a <<endl;
+//        //make a input string stream
+//        istringstream iss(lineStr);
+//        //read from the iss until end of string
+//        string word;
+//        while( iss >> word )
+//        {
+//            cout <<word << " ";
+//        }
+//        cout << endl;
 //    }
+//    inFile_map.close();
+//
+//    //read a line until EOF
+//    while (getline(inFile_transaction,lineStr))
+//    {
+//        //make a input string stream
+//        istringstream iss(lineStr);
+//        //read from the iss until end of string
+//        string word;
+//        while( iss >> word )
+//        {
+//            cout <<word << " ";
+//        }
+//        cout << endl;
+//    }
+//    inFile_transaction.close();
+//
+//    return 0;
 //}
+
+
 
 int main()
 {
     UBikeSystem TaipeiUBike;
-    string bc = "Electric", SN = "Zhongshan";
     string A0 = "00A00";
     string A1 = "00A01";
     string A2 = "00A02";
     string A3 = "00A03";
     string A4 = "00A04";
     string A5 = "00A05";
-    string A = "Zhongshan";
     TaipeiUBike.NewBike("Electric", A0, 50, "Zhongshan");
     TaipeiUBike.NewBike("Electric", A1, 20, "Zhongshan");
     TaipeiUBike.NewBike("Electric", A2, 30, "Zhongshan");

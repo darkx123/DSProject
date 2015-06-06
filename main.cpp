@@ -21,8 +21,10 @@ int main(int argc, char *argv[])
     UBikeSystem TaipeiUBike;
     ifstream inFile_map;
     ifstream inFile_transaction;
+    ofstream outFile;
     inFile_map.open(argv[2]);
     inFile_transaction.open(argv[1]);
+    outFile.open(argv[3]);
 
     string lineStr;
     string name1;
@@ -82,19 +84,26 @@ int main(int argc, char *argv[])
             }
             else if (command == "Trans")
             {
-
+                string s_name;
+                string license;
+                iss >> s_name >> license;
+                TaipeiUBike.TransBike(s_name, license);
             }
             else if (command == "StationReport")
             {
-
+                string s_name;
+                iss >> s_name;
+                TaipeiUBike.StationReport(s_name);
             }
             else if (command == "NetSearch")
             {
-
+                string s_name;
+                iss >> s_name;
+                TaipeiUBike.NetSearch(s_name);
             }
             else if (command == "UbikeReport")
             {
-
+                TaipeiUBike.UbikeReport();
             }
             else
             {

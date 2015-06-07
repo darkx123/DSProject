@@ -9,16 +9,6 @@ using namespace std;
 //
 //enum ClassType { Electric, Lady, Road, Hybrid};
 
-string LicenseToString(LicenseType license)
-{
-    string a = "12345";
-    for(int i = 0; i < 5; i++)
-    {
-        a[i] = license[i];
-    }
-    return a;
-}
-
 
 StatusType StatusStringToEnum(string name)
 {

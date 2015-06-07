@@ -20,7 +20,7 @@ enum StationName
 };
 
 
-typedef char LicenseType[5];
+typedef char LicenseType[6];
 
 struct BikeType
 {

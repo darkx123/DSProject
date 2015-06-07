@@ -7,6 +7,7 @@
 #include "LicenseTag.h"
 #include <iostream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -43,10 +44,7 @@ UBikeSystem::UBikeSystem(char* output_filename)
 void UBikeSystem::NewBike(string bikeclass, string license, int Mile, string S_Name)
 {
     bike = new BikeType;
-    for(int i = 0; i < 5; i++)
-    {
-        bike->License[i] = license[i];
-    }
+    strcpy(bike->License, license.c_str());
     bike->Class = ClassStringToEnum(bikeclass);
     bike->Cursor = 0;
     bike->Mileage = Mile;
@@ -69,18 +67,10 @@ void UBikeSystem::NewBike(string bikeclass, string license, int Mile, string S_N
 int UBikeSystem::JunkIt(string license)
 {
     LicenseType L;
-    for(int i = 0; i < 5; i++)
-    {
-        L[i] = license[i];
-    }
+    strcpy(L, license.c_str());
     bike = HT.SearhBike(L);
-    cout << "Bike ";
-    outFile << "Bike ";
-    for(int i = 0; i < 5; i++)
-    {
-        cout << license[i];
-        outFile << license[i];
-    }
+    cout << "Bike " << L;
+    outFile << "Bike " << L;
     if(!bike) //check existence of bike
     {
         cout << " does not belong to our company." << endl;
@@ -127,10 +117,7 @@ void UBikeSystem::RentBike(string s_name, string Class)
 void UBikeSystem::ReturnBike(string s_name, string license, int Mile)
 {
     LicenseType l;
-    for(int i = 0; i < 5; i++)
-    {
-        l[i] = license[i];
-    }
+    strcpy(l, license.c_str());
     bike = HT.SearhBike(l);
     int chargevalue = Charge(Station_NameToEnum(s_name), Mile - bike->Mileage, bike);
     bike->Mileage = Mile;
@@ -152,25 +139,20 @@ void UBikeSystem::ReturnBike(string s_name, string license, int Mile)
 void UBikeSystem::TransBike(string s_name, string license)
 {
     LicenseType l;
-    cout << "Bike ";
-    outFile << "Bike ";
-    for(int i = 0; i < 5; i++)
-    {
-        l[i] = license[i];
-        cout << l[i];
-        outFile << l[i];
-    }
+    strcpy(l, license.c_str());
+    cout << "Bike " << l;
+    outFile << "Bike " << l;
     BikePtr aBike = HT.SearhBike(l);
     if(!aBike)
     {
-        cout << " does not belong to our company." <<endl;
-        outFile << " does not belong to our company." <<endl;
+        cout << " does not belong to our company." << endl;
+        outFile << " does not belong to our company." << endl;
         return;
     }
     if(aBike->Status == Rented)
     {
-        cout << " is now being rented." <<endl;
-        outFile << " is now being rented." <<endl;
+        cout << " is now being rented." << endl;
+        outFile << " is now being rented." << endl;
         return;
     }
     //Stations[aBike->Station].RemoveBike(aBike);
@@ -198,22 +180,12 @@ void UBikeSystem::TransBike(string s_name, string license)
 void UBikeSystem::Inquire(string license)
 {
     LicenseType l;
-    for(int i = 0; i < 5; i++)
-    {
-        l[i] = license[i];
-    }
+    strcpy(l, license.c_str());
     BikePtr aBike = HT.SearhBike(l);
     if(!aBike)
     {
-        cout << "Bike ";
-        outFile << "Bike ";
-        for(int i = 0; i < 5; i++)
-        {
-            cout << l[i];
-            outFile << l[i];
-        }
-        cout << " does not belong to our company." <<endl;
-        outFile << " does not belong to our company." <<endl;
+        cout << "Bike " << l << " does not belong to our company." << endl;;
+        outFile << "Bike " << l << " does not belong to our company." << endl;;
         return;
     }
     cout << setw(15) << "License" << setw(15) << "Mileage" << setw(15) << "Class" << setw(15) << "Station" << endl;
@@ -260,8 +232,8 @@ void UBikeSystem::StationReport(string s_name)
         subtotal = subtotal + aHeap->Number;
         for(int j = 1; j <= aHeap->Number; j++)
         {
-             cout << setw(15) << LicenseToString(aHeap->Elem[j]->License);
-             outFile << setw(15) << LicenseToString(aHeap->Elem[j]->License);
+             cout << setw(15) << aHeap->Elem[j]->License;
+             outFile << setw(15) << aHeap->Elem[j]->License;
              cout << setw(15) << aHeap->Elem[j]->Mileage;
              outFile << setw(15) << aHeap->Elem[j]->Mileage;
              cout << setw(15) << ClassEumToString(aHeap->Elem[j]->Class);
@@ -298,8 +270,8 @@ void UBikeSystem::StationReport(string s_name)
 
     for(int j = 1; j <= Stations[Station_NameToEnum(s_name)].m_Station.HRent.Number; j++)
     {
-         cout << setw(15) << LicenseToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License);
-         outFile << setw(15) << LicenseToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License);
+         cout << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License;
+         outFile << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->License;
          cout << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Mileage;
          outFile << setw(15) << Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Mileage;
          cout << setw(15) << ClassEumToString(Stations[Station_NameToEnum(s_name)].m_Station.HRent.Elem[j]->Class);
@@ -380,8 +352,8 @@ void UBikeSystem::UbikeReport()
             FreeTotal = FreeTotal + aHeap->Number;
             for(int k = 1; k <= aHeap->Number; k++)
                 {
-                     cout << setw(12) << LicenseToString(aHeap->Elem[k]->License);
-                     outFile << setw(12) << LicenseToString(aHeap->Elem[k]->License);
+                     cout << setw(12) << aHeap->Elem[k]->License;
+                     outFile << setw(12) << aHeap->Elem[k]->License;
                      cout << setw(12) << aHeap->Elem[k]->Mileage;
                      outFile << setw(12) << aHeap->Elem[k]->Mileage;
                      cout << setw(12) << ClassEumToString(aHeap->Elem[k]->Class);
@@ -425,8 +397,8 @@ void UBikeSystem::UbikeReport()
     {
         for(int j = 1; j <= Stations[i].m_Station.HRent.Number; j++)
         {
-             cout << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[j]->License);
-             outFile << setw(12) << LicenseToString(Stations[i].m_Station.HRent.Elem[j]->License);
+             cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
+             outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
              cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
              outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
              cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);

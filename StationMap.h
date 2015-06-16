@@ -19,6 +19,7 @@ public:
     int GetDistance(StationName name1, StationName name2);
 private:
     int a[12][12];
+    bool edge[12][12];
 };
 
 StationMap::StationMap()
@@ -30,8 +31,13 @@ StationMap::StationMap()
             if(i == j)
             {
                 a[i][j] = 0;
+                edge[i][j] = true;
             }
-            else a[i][j] = 1000000;
+            else
+            {
+                a[i][j] = 1000000;
+                edge[i][j] = false;
+            }
         }
     }
 }
@@ -42,6 +48,8 @@ void StationMap::inputMapData(string name1, string name2, int distance)
     int j = Station_NameToEnum(name2);
     a[i][j] = distance;
     a[j][i] = distance;
+    edge[i][j] = true;
+    edge[j][i] = true;
 }
 
 void StationMap::MinDis()
@@ -52,8 +60,14 @@ void StationMap::MinDis()
         {
             for(int j = 0; j < 12; j++)
             {
-                if((a[i][k]+a[k][j]) < a[i][j])
-                    a[i][j] = a[i][k]+a[k][j];
+                if(edge[i][k] && edge[k][j])
+                {
+                    if( ( edge[i][j] && (a[i][k]+a[k][j])<a[i][j] ) || ( !edge[i][j] ) )
+                        {
+                            a[i][j] = a[i][k]+a[k][j];
+                            edge[i][j] = true;
+                        }
+                }
             }
         }
     }

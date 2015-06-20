@@ -395,25 +395,20 @@ void UBikeSystem::UbikeReport()
     outFile << endl;
     for(int i = 0; i < 12; i++)
     {
-        for(int k = 0; k < 4; k++)
+        for(int j = 1; j <= Stations[i].m_Station.HRent.Number; j++)
         {
-            for(int j = 1; j <= Stations[i].m_Station.HRent.Number; j++)
-            {
-                 if(Stations[i].m_Station.HRent.Elem[j]->Class == k)
-                 {
-                     cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
-                     outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
-                     cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
-                     outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
-                     cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
-                     outFile << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
-                     cout << setw(12) << Station_EnumToName(StationName(i));
-                     outFile << setw(12) << Station_EnumToName(StationName(i));
-                     cout << endl;
-                     outFile << endl;
-                 }
-            }
+             cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
+             outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->License;
+             cout << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
+             outFile << setw(12) << Stations[i].m_Station.HRent.Elem[j]->Mileage;
+             cout << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
+             outFile << setw(12) << ClassEumToString(Stations[i].m_Station.HRent.Elem[j]->Class);
+             cout << setw(12) << Station_EnumToName(StationName(i));
+             outFile << setw(12) << Station_EnumToName(StationName(i));
+             cout << endl;
+             outFile << endl;
         }
+
         RentedTotal = RentedTotal + Stations[i].m_Station.HRent.Number;
     }
     for(int i = 0; i < 5; i ++)

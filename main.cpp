@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
         TaipeiUBike.inputMapData(name1, name2, distance);
     }
     inFile_map.close();
+    TaipeiUBike.MinDis();
 
     //read a line until EOF
     while (getline(inFile_transaction,lineStr))
